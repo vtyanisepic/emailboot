@@ -42,9 +42,16 @@ function possibleMoves(cellNumber, pieceType) {
     switch (pieceType) {
         case 'p': // i love you fallthrough
         case 'P':
-            pieceType == 'p' ? possibleMoves.push(locateCellNumber(r + 1, c)) : possibleMoves.push(locateCellNumber(r - 1, c))
+            const upOne = locateCellNumber(r + 1, c)
+            const upTwo = locateCellNumber(r + 2, c)
+            const downOne = locateCellNumber(r - 1, c)
+            const downTwo = locateCellNumber(r - 2, c)
+
+            if (pieceType == 'p' ? board[upOne - 1] != 0 : board[downOne - 1] != 0) break
+            pieceType == 'p' ? possibleMoves.push(upOne) : possibleMoves.push(downOne)
             if ((r == 2 && pieceType == 'p') || (r == 7 && pieceType == 'P')) {
-                pieceType == 'p' ? possibleMoves.push(locateCellNumber(r + 2, c)) : possibleMoves.push(locateCellNumber(r - 2, c))
+                if (pieceType == 'p' ? board[upTwo - 1] != 0 : board[downTwo - 1] != 0) break
+                pieceType == 'p' ? possibleMoves.push(upTwo) : possibleMoves.push(downTwo)
             }
             break
     }
