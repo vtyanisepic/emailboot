@@ -25,16 +25,14 @@ function createBoard() {
 }
 
 function locateCell(cellNumber) {
-    const r = Math.floor((cellNumber - 1) / 8) + 1
-    const c = (cellNumber - 1) % 8 + 1
+    const r = Math.ceil(cellNumber / 8)
+    const c = ((cellNumber - 1) % 8) + 1
 
     return [r, c]
 }
 
 function locateCellNumber(r, c) {
-    r--
-    c--
-    return ((r * 8) + c) + 1 // plus one so that it doesn't start at zero 
+    return (r - 1) * 8 + c
 }
 
 function possibleMoves(cellNumber, pieceType) {
