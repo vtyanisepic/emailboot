@@ -1,0 +1,27 @@
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+td {
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.black {
+    background-color: black;
+}
+
+td img {
+    width: 80%;
+    height: 80%;
+    /* display: block; */
+    object-fit: contain;
+}
