@@ -13,10 +13,15 @@ td {
     box-sizing: border-box;
     text-align: center;
     vertical-align: middle;
+    background-color: #EEEED2;
 }
 
 .black {
-    background-color: black;
+    background-color: #769656;
+}
+
+.possible {
+    background-color: orange;
 }
 
 td img {

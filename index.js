@@ -35,7 +35,16 @@ function locateCellNumber(r, c) {
     return (r - 1) * 8 + c
 }
 
+function removeClassFromAll(target) {
+    const elements = document.querySelectorAll(`.${target}`)
+    elements.forEach(e => {
+        e.classList.remove(target)
+    })
+}
+
 function possibleMoves(cellNumber, pieceType) {
+    removeClassFromAll('possible')
+
     console.log(cellNumber, pieceType)
     const [r, c] = locateCell(cellNumber)
     let possibleMoves = []
@@ -54,6 +63,18 @@ function possibleMoves(cellNumber, pieceType) {
                 pieceType == 'p' ? possibleMoves.push(upTwo) : possibleMoves.push(downTwo)
             }
             break
+    }
+
+    const currentCell = document.getElementById(cellNumber)
+    if (currentCell.classList.contains('selected')) {
+        currentCell.classList.remove('selected')
+    } else {
+        for (let i = 0; i < possibleMoves.length; i++) {
+            const possibleMove = document.getElementById(possibleMoves[i])
+            possibleMove.classList.add('possible')
+        }
+        removeClassFromAll('selected')
+        currentCell.classList.add('selected')
     }
     console.log(possibleMoves)
 }
