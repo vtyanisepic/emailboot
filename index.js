@@ -4,7 +4,7 @@ let board
 
 function createBoard() {
     const grid = document.createElement('table')
-    board = Array.from({ length: 64 }, () => [0, 0])
+    board = new Array(64).fill(0)
     // board = Array.from({ length: 8 }, () =>
     //     Array.from({ length: 8 }, () => Array(2).fill(0))
     // );
@@ -58,8 +58,7 @@ function addPieces(FEN) {
     FEN.replaceAll('/', '')
     for (let i = 0; i < FEN.length; i++) {
         if (FEN[i].toLowerCase() in fen_values) {
-            board[cellNumber - 1][0] = FEN[i]
-            if (FEN[i].toLowerCase() == 'p') board[cellNumber - 1][1] = cellNumber // pawns can move two squares on the first move
+            board[cellNumber - 1] = FEN[i]
 
             const chess_piece = document.createElement('img')
             const isWhite = FEN[i].toUpperCase() === FEN[i] && FEN[i].toLowerCase() !== FEN[i]
