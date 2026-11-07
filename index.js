@@ -35,15 +35,16 @@ function locateCellNumber(r, c) {
     return (r - 1) * 8 + c
 }
 
-function removeClassFromAll(target) {
+function removeClassFromAll(target, clean = false, functionName = null) {
     const elements = document.querySelectorAll(`.${target}`)
     elements.forEach(e => {
         e.classList.remove(target)
+        if (clean == true) e.removeEventListener('click', functionName)
     })
 }
 
 function possibleMoves(cellNumber, pieceType) {
-    removeClassFromAll('possible')
+    removeClassFromAll('possible', true, movePiece)
 
     console.log(cellNumber, pieceType)
     const [r, c] = locateCell(cellNumber)
@@ -72,11 +73,16 @@ function possibleMoves(cellNumber, pieceType) {
         for (let i = 0; i < possibleMoves.length; i++) {
             const possibleMove = document.getElementById(possibleMoves[i])
             possibleMove.classList.add('possible')
+            possibleMove.addEventListener('click', movePiece.bind(null, cellNumber, possibleMoves[i]))
         }
         removeClassFromAll('selected')
         currentCell.classList.add('selected')
     }
     console.log(possibleMoves)
+}
+
+function movePiece(piecePosition, targetPosition) {
+    console.log(piecePosition)
 }
 
 function addPieces(FEN) {
