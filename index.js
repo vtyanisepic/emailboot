@@ -59,6 +59,26 @@ function possibleMoves(cellNumber, pieceType) {
     switch (pieceType) {
         case 'p': // i love you fallthrough
         case 'P':
+            const blackDiagRight = locateCellNumber(r + 1, c + 1)
+            const blackDiagLeft = locateCellNumber(r + 1, c - 1)
+            const whiteDiagRight = locateCellNumber(r - 1, c + 1)
+            const whiteDiagLeft = locateCellNumber(r - 1, c - 1)
+            if (isWhite(pieceType) && r != 1) {
+                if (c != 8) {
+                    if (board[whiteDiagRight - 1] != 0 && !isWhite(board[whiteDiagRight - 1])) possibleMoves.push(whiteDiagRight)
+                }
+                if (c != 1) {
+                    if (board[whiteDiagLeft - 1] != 0 && !isWhite(board[whiteDiagLeft - 1])) possibleMoves.push(whiteDiagLeft)
+                }
+            } else if (!isWhite(pieceType) && r != 8) {
+                if (c != 8) {
+                    if (board[blackDiagRight - 1] != 0 && isWhite(board[blackDiagRight - 1])) possibleMoves.push(blackDiagRight)
+                }
+                if (c != 1) {
+                    if (board[blackDiagLeft - 1] != 0 && isWhite(board[blackDiagLeft - 1])) possibleMoves.push(blackDiagLeft)
+                }
+            }
+
             const blackForwardOne = locateCellNumber(r + 1, c)
             const blackForwardTwo = locateCellNumber(r + 2, c)
             const whiteForwardOne = locateCellNumber(r - 1, c)
@@ -71,19 +91,10 @@ function possibleMoves(cellNumber, pieceType) {
                 pieceType == 'p' ? possibleMoves.push(blackForwardTwo) : possibleMoves.push(whiteForwardTwo)
             }
 
-            const upRight = locateCellNumber(r + 1, c + 1)
-            const upLeft = locateCellNumber(r + 1, c - 1)
-            const whiteDiagRight = locateCellNumber(r - 1, c + 1)
-            const whiteDiagLeft = locateCellNumber(r - 1, c - 1)
-            if (isWhite(pieceType) && r != 1) {
-                if (c != 8) {
-                    if (board[whiteDiagRight - 1] != 0 && !isWhite(board[whiteDiagRight - 1])) possibleMoves.push(whiteDiagRight)
-                }
-                if (c != 1) {
-                    if (board[whiteDiagLeft - 1] != 0 && !isWhite(board[whiteDiagLeft - 1])) possibleMoves.push(whiteDiagLeft)
-                }
-            }
             break
+        case 'r':
+        case 'R':
+            
     }
 
     const currentCell = document.getElementById(cellNumber)
